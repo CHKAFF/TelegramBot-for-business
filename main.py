@@ -4,6 +4,12 @@ from telebot import types
 TOKEN = "855474923:AAES5V4roQy8REHoKJthcsZtOGMf2GbQS98"
 bot = telebot.TeleBot(TOKEN)
 
+menu_markup = types.InlineKeyboardMarkup(row_width=1)
+feedback_button = types.InlineKeyboardButton(text = "Запросить Feedback", callback_data= "feedback")
+event_button = types.InlineKeyboardButton(text = "Оповестить о Мероприятии", callback_data= "event")
+meeting_button = types.InlineKeyboardButton(text = "Оповестить о Совещании", callback_data= "meeting")
+menu_markup.add(feedback_button, event_button, menu_markup)
+
 @bot.message_handler(commands = ["start"])
 def start(message):
     registration_markup = types.InlineKeyboardMarkup()
