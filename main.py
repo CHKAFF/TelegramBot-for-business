@@ -25,7 +25,13 @@ def callback_handler(call):
     try:
         if call.message:
             if call.data == "registration":
-                bot.send_message(call.from_user.id, "Поздравляем, вы стали членом нашей дружно команды!\nТеперь вы будете получать уведомления о совещаниях и предстоящих событиях, так же у вас есть возможность самим предупреждать людей и собирать Фидбэки по прошедшим мероприятиям.")
+                bot.send_message(call.from_user.id, "Поздравляем, вы стали членом нашей дружно команды!\nТеперь вы будете получать уведомления о совещаниях и предстоящих событиях, так же у вас есть возможность самим предупреждать людей и собирать Фидбэки по прошедшим мероприятиям.", reply_markup=menu_markup )
+            elif call.data == "feedback":
+                pass
+            elif call.data == "event":
+                pass
+            elif call.data == "meeting":
+                pass
     except Exception as e:
         print(repr(e))
 bot.polling(True)
