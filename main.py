@@ -8,7 +8,7 @@ menu_markup = types.InlineKeyboardMarkup(row_width=1)
 feedback_button = types.InlineKeyboardButton(text = "Запросить Feedback", callback_data= "feedback")
 event_button = types.InlineKeyboardButton(text = "Оповестить о Мероприятии", callback_data= "event")
 meeting_button = types.InlineKeyboardButton(text = "Оповестить о Совещании", callback_data= "meeting")
-menu_markup.add(feedback_button, event_button, menu_markup)
+menu_markup.add(feedback_button, event_button, meeting_button)
 
 @bot.message_handler(commands = ["start"])
 def start(message):
@@ -25,9 +25,9 @@ def callback_handler(call):
     try:
         if call.message:
             if call.data == "registration":
-                bot.send_message(call.from_user.id, "Поздравляем, вы стали членом нашей дружно команды!\nТеперь вы будете получать уведомления о совещаниях и предстоящих событиях, так же у вас есть возможность самим предупреждать людей и собирать Фидбэки по прошедшим мероприятиям.", reply_markup=menu_markup )
+                bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Поздравляем, вы стали членом нашей дружно команды!\nТеперь вы будете получать уведомления о совещаниях и предстоящих событиях, так же у вас есть возможность самим предупреждать людей и собирать Фидбэки по прошедшим мероприятиям.", reply_markup=menu_markup)
             elif call.data == "feedback":
-                pass
+                 bot.send_message(call.from_user.id, )
             elif call.data == "event":
                 pass
             elif call.data == "meeting":
