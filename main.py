@@ -10,11 +10,12 @@ event_button = types.InlineKeyboardButton(text = "Оповестить о Мер
 meeting_button = types.InlineKeyboardButton(text = "Оповестить о Совещании", callback_data= "meeting")
 menu_markup.add(feedback_button, event_button, meeting_button)
 
-admin_markup = types.InlineKeyboardMarkup(row_width=1)
+admin_markup = types.InlineKeyboardMarkup(row_width=2)
 employees_list = types.InlineKeyboardButton(text = "Список сотрудников", callback_data= "employees_list")
 employee_add = types.InlineKeyboardButton(text = "Добавить сотрудника", callback_data= "employee_add")
 employee_delete = types.InlineKeyboardButton(text = "Удалить сотрудника", callback_data= "employee_delete")
-admin_markup.add(employees_list, employee_add, employee_delete)
+exit_button = types.InlineKeyboardButton(text = "Выйти", callback_data= "exit_button")
+admin_markup.add(employees_list, employee_add, employee_delete, exit_button)
 
 @bot.message_handler(commands = ["start"])
 def start(message):
@@ -45,6 +46,13 @@ def callback_handler(call):
                 pass
             elif call.data == "meeting":
                 pass
+            elif call.data == "employees_list":
+                pass
+            elif call.data == "employee_add":
+                pass
+            elif call.data == "employee_delete":
+                pass
     except Exception as e:
         print(repr(e))
+
 bot.polling(True)
