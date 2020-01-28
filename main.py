@@ -40,6 +40,7 @@ def callback_handler(call):
     try:
         if call.message:
             if call.data == "registration":
+                add_to_db(call)
                 bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Поздравляем, вы стали членом нашей дружно команды!\nТеперь вы будете получать уведомления о совещаниях и предстоящих событиях, так же у вас есть возможность самим предупреждать людей и собирать Фидбэки по прошедшим мероприятиям.", reply_markup=menu_markup)
             elif call.data == "feedback":
                 bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="good", reply_markup=menu_markup)
@@ -62,5 +63,14 @@ def open_db():
     conn = psycopg2.connect(dbname = "***", user = "***", password = "***", host = "***")
     cursor = conn.cursor()
     return conn,cursor
+
+def add_to_db(call):
+    conn, cursor = open_db
+    information = (call.from_user.first_name + " " + call.from_user.last_name, call.from_user.id)
+    insert_query = '''INSERT INTO name_db (name,id) VALUES (%s,%s)'''
+    cursor.execute(insert_query, information)
+    conn.commit()
+    cursor.close()
+    conn.close()
 
 bot.polling(True)
