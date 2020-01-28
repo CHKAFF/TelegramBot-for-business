@@ -10,6 +10,12 @@ event_button = types.InlineKeyboardButton(text = "Оповестить о Мер
 meeting_button = types.InlineKeyboardButton(text = "Оповестить о Совещании", callback_data= "meeting")
 menu_markup.add(feedback_button, event_button, meeting_button)
 
+admin_markup = types.InlineKeyboardMarkup(row_width=1)
+employees_list = types.InlineKeyboardButton(text = "Список сотрудников", callback_data= "employees_list")
+employee_add = types.InlineKeyboardButton(text = "Добавить сотрудника", callback_data= "employee_add")
+employee_delete = types.InlineKeyboardButton(text = "Удалить сотрудника", callback_data= "employee_delete")
+admin_markup.add(employees_list, employee_add, employee_delete)
+
 @bot.message_handler(commands = ["start"])
 def start(message):
     registration_markup = types.InlineKeyboardMarkup()
@@ -19,7 +25,7 @@ def start(message):
 @bot.message_handler(commands = ["admin"])
 def admin(message):
     if message.text == "/admin adminsuper":
-        bot.send_message(message.from_user.id, "Всё ок")
+        bot.send_message(message.from_user.id, "Это Меню Админа, здесь мы можете ПОСМОТРЕТЬ всех сотрудников, УДАЛИТЬ или ДОБАВИТЬ новых", reply_markup=admin_markup)
     else:
         bot.send_message(message.from_user.id, "Пароль неверный")
 
