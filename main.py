@@ -52,6 +52,8 @@ def callback_handler(call):
                 pass
             elif call.data == "employee_delete":
                 pass
+            elif call.data == "exit_button":
+                pass
     except Exception as e:
         print(repr(e))
 
