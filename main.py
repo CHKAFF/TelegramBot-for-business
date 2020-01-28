@@ -1,5 +1,6 @@
 import telebot
 from telebot import types
+import psycopg2
 
 TOKEN = "855474923:AAES5V4roQy8REHoKJthcsZtOGMf2GbQS98"
 bot = telebot.TeleBot(TOKEN)
@@ -56,5 +57,10 @@ def callback_handler(call):
                 pass
     except Exception as e:
         print(repr(e))
+
+def open_db():
+    conn = psycopg2.connect(dbname = "***", user = "***", password = "***", host = "***")
+    cursor = conn.cursor()
+    return conn,cursor
 
 bot.polling(True)
